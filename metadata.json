@@ -1,0 +1,5 @@
+{
+  "name": "Madness Tracker",
+  "description": "A collaborative March Madness pick tracker with real-time simulations and competitor insights.",
+  "requestFramePermissions": []
+}

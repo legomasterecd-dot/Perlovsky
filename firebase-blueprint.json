@@ -1,0 +1,73 @@
+{
+  "entities": {
+    "Tournament": {
+      "title": "Tournament",
+      "description": "A March Madness tournament configuration.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "year": { "type": "number" },
+        "regions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "teams": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": "string" },
+                    "name": { "type": "string" },
+                    "seed": { "type": "number" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "required": ["name", "year", "regions"]
+    },
+    "Pick": {
+      "title": "Pick",
+      "description": "A user's bracket picks for a tournament.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "tournamentId": { "type": "string" },
+        "bracket": { "type": "object" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "userName", "tournamentId", "bracket"]
+    },
+    "Outcome": {
+      "title": "Outcome",
+      "description": "The actual or simulated results of a tournament.",
+      "type": "object",
+      "properties": {
+        "tournamentId": { "type": "string" },
+        "results": { "type": "object" },
+        "isSimulated": { "type": "boolean" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["tournamentId", "results"]
+    }
+  },
+  "firestore": {
+    "/tournaments/{tournamentId}": {
+      "schema": "Tournament",
+      "description": "Tournament configurations."
+    },
+    "/picks/{pickId}": {
+      "schema": "Pick",
+      "description": "User bracket picks."
+    },
+    "/outcomes/{outcomeId}": {
+      "schema": "Outcome",
+      "description": "Tournament outcomes (actual or simulated)."
+    }
+  }
+}
